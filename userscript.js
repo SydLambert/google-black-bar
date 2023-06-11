@@ -233,9 +233,7 @@ function nukeStockButtons() {
             elements.push(...document.querySelectorAll(".zItAnd"));
             // TODO remove suggested searches
 
-            for (let element of elements) {
-                element.parentNode.removeChild(element);
-            }
+            elements.forEach(e=>e.parentNode.removeChild(e));
             break;
         case "images":
             document.querySelectorAll(".NZmxZe").forEach(e=>e.parentNode.removeChild(e));
