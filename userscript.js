@@ -25,6 +25,7 @@ const GOOGLE_SERVICES = [
     "play",
     "youtube",
     "news",
+    "shopping",
 ];
 
 const TRANSFORMERS = {
@@ -46,6 +47,9 @@ const TRANSFORMERS = {
     news: new UrlTransformer("news", "News", (query, location) => {
         return `https://www.google.com/search?tbm=nws&q=${encodeURIComponent(query)}`;
     }),
+    shopping: new UrlTransformer("shopping", "Shopping", (query, location) => {
+        return `https://www.google.com/search?tbm=shop&q=${encodeURIComponent(query)}`;
+    }),
 };
 const TRANSFORMERS_ORDER = [
     "web",
@@ -54,6 +58,7 @@ const TRANSFORMERS_ORDER = [
     "play",
     "youtube",
     "news",
+    "shopping",
 ];
 
 
@@ -63,6 +68,7 @@ function determineCurrentPageService() {
     switch (searchParams.get("tbm")) {
         case "isch": return "images";
         case "nws": return "news";
+        case "shop": return "shopping";
     }
 
     if (/^(www\.)?youtube\.com$/.test(location.host)) {
@@ -104,6 +110,7 @@ function extractQueryFromCurrentPage() {
         case "images":
         case "play":
         case "news":
+        case "shopping":
             return searchParams.get("q");
         case "maps":
             // May cause index out of bounds error if regex doesn't match
@@ -183,6 +190,7 @@ function createStyle() {
     switch (currentService) {
         case "web":
         case "news":
+        case "shopping":
             style.innerHTML += `
                 /* Page body */
                 #gsr {
@@ -218,6 +226,7 @@ function nukeStockButtons() {
     switch (currentService) {
         case "web":
         case "news":
+        case "shopping":
             let elements = [];
 
             // Web, images, ...
@@ -254,6 +263,7 @@ if ([
     "web",
     "images",
     "news",
+    "shopping",
 ].includes(currentService)) {
     console.log(`Applicable service`);
     addBarToPage();
