@@ -174,6 +174,8 @@ function createStyle() {
             height: 53px;
             box-sizing: border-box;
             padding: 8px 15px;
+            font-family: arial, sans-serif;
+            font-size: 14px;
             color: #9b9e9c;
             text-decoration: none;
         }
